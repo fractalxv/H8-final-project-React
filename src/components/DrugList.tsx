@@ -38,7 +38,7 @@ export default function DrugList({ drug }: { drug: DrugType }) {
                     <img 
                         src={drug.imgUrl} 
                         alt={drug.title} 
-                        className="w-full h-45 object-cover flex-col justify-between items-baseline rounded-t-lg"
+                        className="w-full object-cover flex-col justify-between items-baseline"
                     />
                     {currentStock <= 0 && (
                         <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 m-2 rounded">

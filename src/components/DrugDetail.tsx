@@ -98,7 +98,7 @@ export default function DrugDetail() {
       <div className="bg-white shadow-lg rounded-xl border-l border-gray-200 md:w-1/3">
         <div className="p-6">
           <h3 className="text-xl font-bold text-gray-900 mb-4 text-center text-teal-500 ">
-            How to Buy Medicine at EasyPharmacy?
+          Bagaimana Membeli Obat di EasyPharmacy?
           </h3>
           <div className="mb-6">
             <img 
@@ -109,28 +109,28 @@ export default function DrugDetail() {
           </div>
           <ul className="space-y-6">
             <li className="flex items-start">
-              <div className="flex-shrink-0 mr-3 mt-1 text-teal-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex-shrink-0 mr-3 mt-1 text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="teal">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <span>Search for medicines based on your needs</span>
+              <span>Cari obat sesuai kebutuhan anda</span>
             </li>
             <li className="flex items-start">
-              <div className="flex-shrink-0 mr-3 mt-1 text-teal-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex-shrink-0 mr-3 mt-1 text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="teal">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </div>
-              <span>Choose medicines according to the description (attach doctor's prescription if buying prescription drugs)</span>
+              <span>Pilih obat sesuai dengan deskripsi (lampirkan resep dokter jika membeli obat keras)</span>
             </li>
             <li className="flex items-start">
-              <div className="flex-shrink-0 mr-3 mt-1 text-teal-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex-shrink-0 mr-3 mt-1 text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="teal">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
               </div>
-              <span>Fill in the user information form</span>
+              <span>Isi form keterangan pengguna</span>
             </li>
           </ul>
         </div>
@@ -138,3 +138,5 @@ export default function DrugDetail() {
     </div>
   );
 }
+
+// src="https://img.freepik.com/free-vector/medicine-concept-illustration_114360-30752.jpg" 

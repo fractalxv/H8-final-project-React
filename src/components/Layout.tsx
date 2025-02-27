@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import { useAuth } from '../hooks/useAuth';
 import { useState, useCallback } from 'react';
-import { useDrug } from '../context/DrugContext';
+// import { useDrug } from '../context/DrugContext';
 import { useAppDispatch } from '../hooks/useReduxHooks';
 import { searchDrugs } from '../store/slices/drugSlice';
 
@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
             setKeyword={setKeyword} 
             onChange={handleSearch} 
           />
-          <div className="container mx-auto px-4 py-4">
+          <div className="container mx-auto px-6 ">
             {children}
           </div>
         </>

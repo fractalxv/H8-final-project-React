@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, LogOut, Pill } from "lucide-react";
 import Search from "./Search";
@@ -26,10 +25,10 @@ export default function Header({ title, keyword, setKeyword, onChange }: HeaderP
     <header className=" mb-2 py-2">
       <div className="container mx-auto px-1">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4 gap-3">
-          {/* Logo and Title */}
+          {/* Logo Title */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <Pill className="h-8 w-8 text-teal-500" />
+              <Pill className="h-10 w-10 text-teal-500" />
               <span className="text-3xl font-bold text-teal-600">{title}</span>
             </Link>
           </div>
