@@ -37,7 +37,7 @@ export default function Login() {
           <Pill className="h-12 w-12 text-teal-600" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold text-teal-900">
-          Login to EasyPharmacy
+          Welcome to EasyPharmacy!
         </h2>
       </div>
 
