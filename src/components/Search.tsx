@@ -19,7 +19,7 @@ export default function Search({ keyword, setKeyword, onChange }: SearchProps) {
         placeholder="Search medicines..."
         value={keyword}
         onChange={handleChange}
-        className="w-full px-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        className="w-full px-4 py-4 rounded-full bg-slate-100 outline-teal-300 focus:ring-3 focus:ring-teal-200"
       />
        <button 
           type="submit" 
@@ -30,7 +30,7 @@ export default function Search({ keyword, setKeyword, onChange }: SearchProps) {
         className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
         fill="none"
         viewBox="0 0 24 24"
-        stroke="currentColor"
+        stroke="teal"
       >
         <path
           strokeLinecap="round"

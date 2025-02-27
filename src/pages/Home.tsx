@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDrug } from '../context/DrugContext';
 import DrugList from '../components/DrugList';
 import { useAppDispatch } from '../hooks/useReduxHooks';
@@ -11,12 +11,12 @@ export default function Home() {
   const [sortField, setSortField] = useState<'title' | 'stock'>('title');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  // Effect for stock filter
+  // stok
   useEffect(() => {
     dispatch(filterByStock(showInStock));
   }, [showInStock, dispatch]);
 
-  // Effect for sorting
+  // sort
   useEffect(() => {
     dispatch(sortDrugs({ field: sortField, order: sortOrder }));
   }, [sortField, sortOrder, dispatch]);
@@ -35,7 +35,7 @@ export default function Home() {
       <div className="flex flex-wrap items-center gap-4 my-6">
         <button
           onClick={() => toggleSort('title')}
-          className={`flex items-center space-x-1 px-3 py-2 rounded-lg border ${
+          className={`flex items-center space-x-1 px-2 py-1 rounded-lg border ${
             sortField === 'title' ? 'border-teal-500 bg-teal-50' : 'border-gray-300 hover:bg-gray-50'
           }`}
         >
@@ -53,7 +53,7 @@ export default function Home() {
         </button>
         <button
           onClick={() => toggleSort('stock')}
-          className={`flex items-center space-x-1 px-3 py-2 rounded-lg border ${
+          className={`flex items-center space-x-1 px-2 py-1 rounded-lg border ${
             sortField === 'stock' ? 'border-teal-500 bg-teal-50' : 'border-gray-300 hover:bg-gray-50'
           }`}
         >

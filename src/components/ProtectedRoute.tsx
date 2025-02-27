@@ -8,9 +8,7 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated, login } = useAuth();
-  
-  // Check localStorage for user on component mount
-  // This is now handled by redux-persist, but we'll keep this for any edge cases
+
   useEffect(() => {
     if (!isAuthenticated) {
       const storedUser = localStorage.getItem('user');

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, LogOut, Pill } from "lucide-react";
 import Search from "./Search";
+import Button from "./UI/Button";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 
@@ -56,13 +57,11 @@ export default function Header({ title, keyword, setKeyword, onChange }: HeaderP
                 </span>
               )}
             </Link>
-            <button
+            <Button
               onClick={handleLogout}
-              className="flex items-center space-x-1 text-gray-600 hover:text-teal-600 transition-colors"
-            >
-              <LogOut className="h-6 w-6" />
-              <span className="hidden md:inline">Logout</span>
-            </button>
+              label="Logout"
+              className="flex items-center space-x-1 text-sm py-2 px-3"
+            />
           </div>
         </div>
       </div>
