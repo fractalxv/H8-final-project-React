@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import drugData from '../drug.json';
+import drugData from '../../store/drug.json';
 import { DrugType } from '../../components/DrugList';
 
 interface DrugState {
@@ -29,7 +29,7 @@ const applyFilters = (
 ) => {
   let result = [...drugs];
   
-  // Apply keyword filter
+  // keyword filter
   if (keyword.trim()) {
     result = result.filter(drug => 
       drug.title.toLowerCase().includes(keyword.toLowerCase()) ||
@@ -38,12 +38,12 @@ const applyFilters = (
     );
   }
   
-  // Apply stock filter
+  // stock filter
   if (inStockOnly) {
     result = result.filter(drug => drug.stock > 0);
   }
   
-  // Apply sorting
+  // sorting
   result.sort((a, b) => {
     if (sortField === 'title') {
       return sortOrder === 'asc' 
@@ -95,9 +95,71 @@ const drugSlice = createSlice({
         order
       );
     },
+    decreaseStock: (state, action: PayloadAction<{ drugId: number; quantity: number }>) => {
+      const { drugId, quantity } = action.payload;
+      
+      //decrease stock
+      const drugIndex = state.drugs.findIndex(drug => drug.id === drugId);
+      if (drugIndex !== -1) {
+        state.drugs[drugIndex].stock = Math.max(0, state.drugs[drugIndex].stock - quantity);
+      }
+      
+      // filter
+      state.filteredDrugs = applyFilters(
+        state.drugs,
+        state.currentKeyword,
+        state.showInStockOnly,
+        state.currentSortField,
+        state.currentSortOrder
+      );
+    },
+    updateStock: (state, action: PayloadAction<{ drugId: number; newQuantity: number; oldQuantity: number }>) => {
+      const { drugId, newQuantity, oldQuantity } = action.payload;
+      const difference = newQuantity - oldQuantity;
+      
+      // Find the drug and update its stock
+      const drugIndex = state.drugs.findIndex(drug => drug.id === drugId);
+      if (drugIndex !== -1) {
+        state.drugs[drugIndex].stock = Math.max(0, state.drugs[drugIndex].stock - difference);
+      }
+      
+      // Update filtered drugs
+      state.filteredDrugs = applyFilters(
+        state.drugs,
+        state.currentKeyword,
+        state.showInStockOnly,
+        state.currentSortField,
+        state.currentSortOrder
+      );
+    },
+    restoreStock: (state, action: PayloadAction<{ drugId: number; quantity: number }>) => {
+      const { drugId, quantity } = action.payload;
+      
+      // Find the drug and increase its stock
+      const drugIndex = state.drugs.findIndex(drug => drug.id === drugId);
+      if (drugIndex !== -1) {
+        state.drugs[drugIndex].stock += quantity;
+      }
+      
+      // Update filtered drugs
+      state.filteredDrugs = applyFilters(
+        state.drugs,
+        state.currentKeyword,
+        state.showInStockOnly,
+        state.currentSortField,
+        state.currentSortOrder
+      );
+    }
   },
 });
 
-export const { searchDrugs, filterByStock, sortDrugs } = drugSlice.actions;
+export const { 
+  searchDrugs, 
+  filterByStock, 
+  sortDrugs, 
+  decreaseStock, 
+  updateStock, 
+  restoreStock 
+} = drugSlice.actions;
 
 export default drugSlice.reducer;

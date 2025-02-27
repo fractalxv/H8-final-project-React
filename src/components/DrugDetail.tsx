@@ -4,25 +4,29 @@ import drugData from "../store/drug.json";
 import { DrugType } from "./DrugList";
 import Button from "./UI/Button";
 import { useCart } from "../hooks/useCart";
+import { useAppSelector } from "../hooks/useReduxHooks";
 
 export default function DrugDetail() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const drugItem: DrugType = drugData.find(
+  
+  // Get the drug from the Redux store
+  const drugs = useAppSelector(state => state.drug.drugs);
+  const drugItem: DrugType = drugs.find(
     (drug) => drug.id === parseInt(id as string)
   )!;
 
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   
-  // Check if medicine is in stock
+  // Check if in stock
   const inStock = drugItem.stock > 0;
   
   const handleAddToCart = () => {
     if (inStock && quantity > 0 && quantity <= drugItem.stock) {
       addToCart(drugItem, quantity);
       // Show success notification
-      alert(`Added ${quantity} ${drugItem.title} to cart`);
+      // alert(`Added ${quantity} ${drugItem.title} to cart`);
     }
   };
 
@@ -47,7 +51,6 @@ export default function DrugDetail() {
           {drugItem.description}
         </p>
 
-        {/* Stock and Add to Cart section */}
         <div className="flex items-center mb-4">
           <span className="font-medium mr-2">Stock:</span>
           <span className={`${inStock ? 'text-green-600' : 'text-red-600'}`}>
@@ -91,8 +94,7 @@ export default function DrugDetail() {
           </button>
         </div>
       </div>
-    
-      {/* Right section: How to buy medicine - NARROWER with border */}
+
       <div className="bg-white shadow-lg rounded-xl border-l border-gray-200 md:w-1/3">
         <div className="p-6">
           <h3 className="text-xl font-bold text-gray-900 mb-4 text-center text-teal-500 ">

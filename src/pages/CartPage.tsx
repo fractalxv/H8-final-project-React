@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import Button from '../components/UI/Button';
+import { useAppSelector } from '../hooks/useReduxHooks';
 
 export default function CartPage() {
   const { items, totalPrice, updateQuantity, removeFromCart } = useCart();
+  // Get the data from the Redux store
+  const drugs = useAppSelector(state => state.drug.drugs);
 
   if (items.length === 0) {
     return (
@@ -28,56 +31,66 @@ export default function CartPage() {
       <h1 className="text-2xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="p-6 space-y-4">
-          {items.map((item) => (
-            <div
-              key={item.drug.id}
-              className="flex items-center space-x-4 py-4 border-b last:border-0"
-            >
-              <img
-                src={item.drug.imgUrl}
-                alt={item.drug.title}
-                className="h-20 w-20 object-cover rounded-lg"
-              />
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {item.drug.title}
-                </h3>
-                <p className="text-sm text-gray-600">{item.drug.desc}</p>
-              </div>
-              <div className="flex items-center space-x-4">
-                <select
-                  value={item.quantity}
-                  onChange={(e) => updateQuantity(item.drug.id, Number(e.target.value))}
-                  className="rounded-md border-gray-300 text-gray-700"
-                >
-                  {[...Array(item.drug.stock)].map((_, i) => (
-                    <option key={i + 1} value={i + 1}>
-                      {i + 1}
-                    </option>
-                  ))}
-                </select>
-                <div className="text-right">
-                  <div className="text-lg font-semibold text-gray-900">
-                    {item.drug.price}
-                  </div>
+          {items.map((item) => {
+            // Get the stock information for this drug
+            const currentDrug = drugs.find(d => d.id === item.drug.id);
+            const currentStock = currentDrug ? currentDrug.stock : 0;
+            
+            return (
+              <div
+                key={item.drug.id}
+                className="flex items-center space-x-4 py-4 border-b last:border-0"
+              >
+                <img
+                  src={item.drug.imgUrl}
+                  alt={item.drug.title}
+                  className="h-20 w-20 object-cover rounded-lg"
+                />
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {item.drug.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">{item.drug.desc}</p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Available stock: {currentStock}
+                  </p>
                 </div>
-                <button
-                  onClick={() => removeFromCart(item.drug.id)}
-                  className="p-2 text-gray-400 hover:text-red-600 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
+                <div className="flex items-center space-x-4">
+                  <select
+                    value={item.quantity}
+                    onChange={(e) => updateQuantity(item.drug.id, Number(e.target.value))}
+                    className="rounded-md border-gray-300 text-gray-700"
+                  >
+                    {[...Array(item.quantity + currentStock)].map((_, i) => (
+                      <option key={i + 1} value={i + 1}>
+                        {i + 1}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="text-right">
+                    <div className="text-lg font-semibold text-gray-900">
+                      {item.drug.price}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => removeFromCart(item.drug.id)}
+                    className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="bg-gray-50 p-6">
           <div className="flex items-center justify-between">
             <span className="text-lg font-semibold text-gray-900">Total</span>
-            <span className="text-2xl font-bold text-teal-600">Rp {totalPrice.toFixed(2)}</span>
+            <span className="text-2xl font-bold text-teal-600">Rp {totalPrice.toFixed(3)}</span>
           </div>
+          <hr className="my-3" />
           <Button
             label="Proceed to Checkout"
             className="mt-4 w-full py-3 px-6"

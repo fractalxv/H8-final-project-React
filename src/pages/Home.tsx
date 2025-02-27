@@ -41,7 +41,7 @@ export default function Home() {
         >
           <span>Name</span>
           <svg 
-            xmlns="http://www.w3.org/2000/svg" 
+            // xmlns="http://www.w3.org/2000/svg" 
             className="h-4 w-4" 
             fill="none" 
             viewBox="0 0 24 24" 
@@ -69,12 +69,12 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
           </svg>
         </button>
-        <label className="flex items-center space-x-2">
+        <label className="flex items-center space-x-3">
           <input
             type="checkbox"
             checked={showInStock}
             onChange={(e) => setShowInStock(e.target.checked)}
-            className="rounded text-teal-600 focus:ring-teal-500"
+            className="rounded text-teal-800 focus:ring-teal-500"
           />
           <span>In Stock Only</span>
         </label>
@@ -88,7 +88,7 @@ export default function Home() {
 
       {filteredDrugs.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500">No medicines found matching your criteria.</p>
+          <p className="text-gray-500">Obat yang kamu cari, gak ada nih...</p>
         </div>
       )}
     </div>
