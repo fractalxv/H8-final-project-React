@@ -9,7 +9,7 @@ import Regist from './pages/Regist';
 import CartPage from './pages/CartPage';
 import DrugDetail from './components/DrugDetail';
 
-function App() {
+export default function App() {
   return (
     <DrugProvider>
       <Router>
@@ -49,5 +49,3 @@ function App() {
     </DrugProvider>
   );
 }
-
-export default App;
