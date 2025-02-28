@@ -8,7 +8,7 @@ import drugReducer from './slices/drugSlice';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'cart'], // only auth and cart will be persisted
+  whitelist: ['auth', 'cart'],
 };
 
 const rootReducer = combineReducers({
